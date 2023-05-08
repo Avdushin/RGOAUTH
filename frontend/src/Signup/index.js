@@ -20,7 +20,7 @@ function RegistrationForm() {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
     }
-    
+
     // set LocalStorage items
     const SetLocalStorageItems = () => {
         // set localstorage items
@@ -31,7 +31,7 @@ function RegistrationForm() {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();       
+        event.preventDefault();
         axios.post('http://localhost:8080/register', { username, email, password })
             .then(response => {
                 setMessage(response.data.message);
@@ -42,28 +42,50 @@ function RegistrationForm() {
                 setIsRegistered(true);
                 setTimeout(() => {
                     window.location.href = "/";
-                  }, 1000);
+                }, 1000);
             })
-            .catch(error => setMessage(error.response.data.message || error.message));       
+            .catch(error => setMessage(error.response.data.message || error.message));
     }
 
     return (
-        <div className='fmt-form'>
-            <h1>SIGN UP</h1>
+        <div className='fmt-form mt-form'>
+            <h1>Регистрация</h1>
             <hr width="13%" />
             <form onSubmit={handleSubmit} onClick={SetLocalStorageItems}>
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={handleUsernameChange} />
-                </label>
-                <label>
-                    Email:
-                    <input type="text" value={email} onChange={handleEmailChange} />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
+                <div className="label-box">
+                    <label>
+                        <p className="labelp">Username</p>
+                        <input
+                        type="text"
+                        value={username}
+                        onChange={handleUsernameChange}
+                        placeholder='Enter username'
+                        required/>
+                    </label>
+                </div>
+                <div className="label-box">
+                    <label>
+                        <p className="labelp">Email</p>
+                        <input
+                        type="text"
+                        value={email}
+                        onChange={handleEmailChange} 
+                        placeholder='Enter email'
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        required />
+                    </label>
+                </div>
+                <div className="label-box">
+                    <label>
+                        <p className="labelp">Password</p>
+                        <input
+                        type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        placeholder='Enter password'
+                        required />
+                    </label>
+                </div>
                 <div className="reg-btn">
                     <button type="submit">Зарегистрироваться</button>
                 </div>
@@ -73,5 +95,5 @@ function RegistrationForm() {
         </div>
     );
 }
-    
+
 export default RegistrationForm;

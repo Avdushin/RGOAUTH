@@ -1,0 +1,12 @@
+:root {
+  --inner-padding: 0px;
+  --white: #fff;
+  --black: #373737;
+  --green: #0e8869;
+  --green-hover: #12745b;
+  --link: #0073a8;
+  --sidebar-size: 250px;
+  --zi-header: 20 !important;
+  --zi-bar: 3 !important;
+  --zi-simple: 2 !important;
+}

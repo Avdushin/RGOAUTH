@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -15,7 +14,7 @@ import (
 func main() {
 	// Logger
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	fmt.Println("[DB] SQL adress: ", vars.DBConn)
+	log.Println("[DB] SQL adress: ", vars.DBConn)
 	if vars.PORT == "" {
 		vars.PORT = ":8080"
 	}

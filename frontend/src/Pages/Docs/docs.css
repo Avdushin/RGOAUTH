@@ -1,0 +1,100 @@
+@import url(../../assets/css/variables.css);
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.documentation-container {
+  display: flex;
+  width: 100%;
+  /* height: 100%; */
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-size);
+  height: 100%;
+  z-index: var(--zi-bar);
+  padding: 40px 0;
+  /* background-color: var(--white); */
+  background-color: #373737;
+  color: #fff;
+}
+
+.sidebar__topics {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.documentation-container .content {
+  margin-top: 20px;
+  /* margin-top: calc(var(--inner-padding) - 180px); */
+  flex: 1;
+  padding: 20px;
+  margin-left: calc(var(--sidebar-size) + 10px);
+}
+
+.content p {
+  width: 85%;
+}
+
+.content p > a {
+  color: var(--link);
+}
+
+.content .pod {
+  margin-left: 20px;
+}
+
+.image {
+  width: 60%;
+  /* height: 60%; */
+}
+.image img {
+  width: 100%;
+}
+.documentation-container h2 {
+  margin-top: 30px;
+}
+
+.documentation-container h3 {
+  margin: 20px 20px;
+}
+
+.documentation-container a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.documentation-container a:hover {
+  color: #0e8869;
+}
+
+/* Responsive styles for docs */
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: calc(var(--sidebar-size) - 20px);
+    height: 100%;
+    z-index: var(--zi-bar);
+    padding: 40px 0;
+    /* background-color: var(--white); */
+    background-color: #373737;
+    color: #fff;
+  }
+  .sidebar__topics {
+    width: 85%;
+    gap: 10px;
+    padding-left: 0px;
+  }
+  /* TODO: responsive burger menu */
+}

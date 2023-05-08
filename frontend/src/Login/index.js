@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../assets/css/forms.css'
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -38,22 +39,36 @@ function LoginForm() {
       });
   }
 
-
   return (
-    <div className='fmt-form'>
+    <div className='fmt-form mt-form'>
       <h2>Вход</h2>
       <hr width="13%" />
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
-        </label>
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
+        <div className="label-box">
+          <label>
+            <p className="labelp">Email</p>
+            <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder='Enter your email'
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            required />
+          </label>
+        </div>
+        <div className="label-box">
+          <label>
+            <p className="labelp">Password</p>
+            <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder='Enter your password'
+            required />
+          </label>
+        </div>
         <div className="reg-btn">
-          <button type="submit">Login</button>
+          <button type="submit">Войти</button>
         </div>
         {message && <p>{message}</p>}
       </form>

@@ -1,9 +1,24 @@
 .main {
+    padding-top: 70px;
     width: 100%;
+    margin: 0 auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
+    /* background-color: #fff; */
 }
 
 .descr {
     flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.intro {
+    width: 100%;
+}
+.intro img {
+    width: 25%;
 }

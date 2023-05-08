@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { GITHUB, VERSION } from '../vars';
 import './header.css';
 
 function Header() {
@@ -17,11 +18,14 @@ function Header() {
     <div className="header">
       <div className="logo">
         <NavLink to={'/'} className='logo'>
-          <h1>RGOAUTH</h1>
+          <h1>RGOAUTH <span className="version">{VERSION}</span></h1>
         </NavLink>
+        <div className="logo_links">
+          <NavLink className='logo_links-item' to='/docs'>Documentation</NavLink>
+          <NavLink className='logo_links-item' to={GITHUB} target='_blank'>GitHub</NavLink>
+        </div>
       </div>
       <div className="user">
-      {username && <div className="hello"><h3>Hello, {username}!</h3></div>}
       </div>
       <nav className="menu">
         {!username && (
@@ -30,10 +34,15 @@ function Header() {
             <NavLink to='/register' className="menu__item">Регистрация</NavLink>
           </div>
         )}
-        
+
         {username && (
-          <div className="menu__item">
-            <a href="#" className='logout' onClick={logout}>Выход</a>
+          <div className="menu__item helo-zone">
+            {username && <div className="hello"><h3>Привет, {username}!</h3></div>}
+            <div className="logout-btn">
+              <a href="#" className='logout' onClick={logout}>
+                <h3 className='logout'>Выход</h3>
+              </a>
+            </div>
           </div>
         )}
       </nav>
