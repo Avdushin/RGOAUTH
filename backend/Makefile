@@ -1,5 +1,5 @@
 Default:
-	go run main.go
+	go run ./cmd/app/main.go
 
 build:
-	go build -o server main.go
+	go build -o server ./cmd/app/main.go
