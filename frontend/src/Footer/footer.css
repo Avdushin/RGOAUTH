@@ -1,0 +1,9 @@
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30%;
+}
+.footer h4 {
+    font-size: 20px;
+}

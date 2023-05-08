@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    padding: 10px 0;
+    height: 30px;
+    justify-content: space-around;
+    align-items: center;
+    background: #0e8869;
+}
+.logo {
+    color: #fff;
+}
+.menu {
+    display: flex;
+    gap: 4px;
+}
+.menu__item, .log-reg, .logout {
+    font-weight: 500;
+    color: #fff;
+}
