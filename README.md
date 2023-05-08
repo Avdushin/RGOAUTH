@@ -1,5 +1,18 @@
 # RGOAUTH
 
+[![pwreview](docs/img/prew.gif)](https://youtu.be/t2KiHOXKsUA)
+
+<!-- [![pwreview]()](https://youtu.be/t2KiHOXKsUA) [DEMO]() -->
+
+<div align="center">
+  <a href="https://youtu.be/t2KiHOXKsUA" target="_blank">
+    <img src="docs/img/i/yt.png" alt="yt-cion" width="12px">
+  </a>
+  <a href="https://youtu.be/t2KiHOXKsUA" target="_blank">
+    DEMO
+  </a>
+</div> <br>
+
 ### REST-API авторизации ReactJS + Go + MySQL.
 ### Данная утилита является хуком для написания REST AUTH. Все данные хранятся в `localStorage()` (локальном хранилище)
 
@@ -16,7 +29,7 @@
 
   ### loggined user
 \
-![](docs/img/1.jpg)
+![](docs/img/login.jpg)
   
 </details>
 
@@ -63,17 +76,6 @@
 
 ![](docs/img/db/users_example.jpg)
 
-
-<!-- ### Таблица Sessions
-  
-структура:
-
-![](docs/img/db/sessions_struct.jpg)
-
-пример:
-
-![](docs/img/db/sessions_example.jpg) -->
-
 </details>
 
 
@@ -113,7 +115,5 @@ go build -o server main.go # make build
 
 ## TODO
 
-- improve backend architecture
-- improve client styles
 - responsive client
 - debug client

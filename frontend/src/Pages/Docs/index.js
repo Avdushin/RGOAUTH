@@ -15,8 +15,7 @@ const Docs = () => {
                 <ul><a href="#handlers#/">/ heandler</a></ul>
                 <ul><a href="#handlers#/login">/login heandler</a></ul>
                 <ul><a href="#handlers#/signup">/signup heandler</a></ul>
-            <li><a href="#section-3">Раздел 3</a></li>
-
+            <li><a href="#db-mysql">База данных</a></li>
           </ul>
         </div>
       </div>

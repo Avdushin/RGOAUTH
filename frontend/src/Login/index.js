@@ -52,7 +52,6 @@ function LoginForm() {
             value={email}
             onChange={handleEmailChange}
             placeholder='Enter your email'
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             required />
           </label>
         </div>
