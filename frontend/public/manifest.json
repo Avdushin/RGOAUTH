@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "RGOAUTH REST",
+  "name": "Create React + GO + MySQL RESTFULL API with Authentication",
   "icons": [
     {
       "src": "favicon.ico",

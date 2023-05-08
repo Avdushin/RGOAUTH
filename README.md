@@ -79,4 +79,5 @@ go build -o server main.go # make build
 
 - improve backend architecture
 - improve client styles
+- responsive client
 - debug client
