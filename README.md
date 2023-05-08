@@ -44,6 +44,38 @@
   
 </details>
 
+## БД
+
+<details>
+  <summary>База данных</summary>
+
+### Таблицы
+
+![](docs/img/db/tables.jpg)
+
+### Таблица Users
+  
+структура:
+
+![](docs/img/db/users_struct.jpg)
+
+пример:
+
+![](docs/img/db/users_example.jpg)
+
+
+<!-- ### Таблица Sessions
+  
+структура:
+
+![](docs/img/db/sessions_struct.jpg)
+
+пример:
+
+![](docs/img/db/sessions_example.jpg) -->
+
+</details>
+
 
 ## How to start?
 

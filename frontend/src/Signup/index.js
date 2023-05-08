@@ -40,6 +40,9 @@ function RegistrationForm() {
                 setEmail('');
                 setPassword('');
                 setIsRegistered(true);
+                setTimeout(() => {
+                    window.location.href = "/";
+                  }, 1000);
             })
             .catch(error => setMessage(error.response.data.message || error.message));       
     }
