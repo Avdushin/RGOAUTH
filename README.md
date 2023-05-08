@@ -74,3 +74,9 @@ go build -o server main.go # make build
 # start server
 ./server
 ```
+
+## TODO
+
+- improve backend architecture
+- improve client styles
+- debug client
