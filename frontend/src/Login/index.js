@@ -5,7 +5,9 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
+  // Heandlers
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   }
@@ -26,8 +28,16 @@ function LoginForm() {
           window.location.href = "/";
         }, 1000);
       })
-      .catch(error => setMessage(error.response.data.message || error.message));
+      .catch(error => {
+        if (error.response.status === 400 && error.response.data === "Request failed with status code 400") {
+          setMessage("Неверные email или пароль");
+        } else {
+          console.log(error.response.data.message || error.message);
+          setMessage("Неверные email или пароль");
+        }
+      });
   }
+
 
   return (
     <div className='fmt-form'>

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './header.css';
 
 function Header() {
-  const username = localStorage.getItem('username') || '';
+  const username = localStorage.getItem('username');
 
   function logout() {
     localStorage.removeItem('registrant');
@@ -24,14 +24,18 @@ function Header() {
       {username && <div className="hello"><h3>Hello, {username}!</h3></div>}
       </div>
       <nav className="menu">
-        <div className="log-reg">
-        <NavLink to='/login' className="menu__item">Вход</NavLink>/
-        <NavLink to='/register' className="menu__item">Регистрация</NavLink>
-        </div>
+        {!username && (
+          <div className="log-reg">
+            <NavLink to='/login' className="menu__item">Вход</NavLink>/
+            <NavLink to='/register' className="menu__item">Регистрация</NavLink>
+          </div>
+        )}
         
-        {username && <div className="menu__item">
-          | <a href="#" className='logout' onClick={logout}>Выход</a>
-        </div>}
+        {username && (
+          <div className="menu__item">
+            <a href="#" className='logout' onClick={logout}>Выход</a>
+          </div>
+        )}
       </nav>
     </div>
   )

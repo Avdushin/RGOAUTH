@@ -16,7 +16,7 @@
 
   ### loggined user
 \
-![](docs/img/1.png)
+![](docs/img/1.jpg)
   
 </details>
 
@@ -24,10 +24,12 @@
   <summary><code>/login</code> heandler </summary>
 
   `/login` heandler
-\
+
 ![login-screen](docs/img/empty.png)
 
-![loggined](docs/img/login.png)
+### After authorization, the password is hashed
+\
+  ![](docs/img/hashed-pass.jpg)
   
 </details>
 
@@ -37,6 +39,8 @@
 ### `/signup` heandler 
 \
 ![](docs/img/signup.jpg)
+
+![](docs/img/signup-process.jpg)
   
 </details>
 

@@ -10,17 +10,22 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var (
+	_ = godotenv.Load()
 	// .env vars
-	PORT   = os.Getenv("PORT")
-	DBName = os.Getenv("DB_NAME")
+	PORT = os.Getenv("PORT")
+	// Получение переменных окружения
 	DBUser = os.Getenv("DB_USER")
 	DBPass = os.Getenv("DB_PASS")
+	DBName = os.Getenv("DB_NAME")
+	DBHost = os.Getenv("DB_HOST")
+	DBPort = os.Getenv("DB_PORT")
 	// DB connection...
-	// DBConn = fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s", DBUser, DBPass, DBName)
-	DBConn = "root:MySQL123@tcp(127.0.0.1:3306)/rgoauth"
+	DBConn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DBUser, DBPass, DBHost, DBPort, DBName)
 )
 
 type User struct {
@@ -31,6 +36,7 @@ type User struct {
 }
 
 func main() {
+	fmt.Println(DBConn)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	if PORT == "" {
 		PORT = ":8080"
@@ -47,6 +53,7 @@ func EnableCORS(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 }
 
+// SignUp handler
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	EnableCORS(&w)
 	if r.Method == "OPTIONS" {
@@ -96,7 +103,15 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer stmt.Close()
 
-	result, err := stmt.Exec(user.Username, user.Email, user.Password)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Println("Error hashing password:", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	result, err := stmt.Exec(user.Username, user.Email, string(hashedPassword))
+
 	if err != nil {
 		log.Println("Error inserting user into database:", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -143,7 +158,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Проверяем, что пользователь существует и пароль совпадает
 	// SELECT id FROM users WHERE username = ? AND password = ?
-	stmt, err := db.Prepare("SELECT username FROM users WHERE email = ? AND password = ?")
+	stmt, err := db.Prepare("SELECT username, password FROM users WHERE email = ?")
 	if err != nil {
 		log.Println("Error preparing database query:", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -151,11 +166,39 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer stmt.Close()
 
-	// var id int64
-	err = stmt.QueryRow(user.Email, user.Password).Scan(&user.Username)
+	var hashedPassword string
+	err = stmt.QueryRow(user.Email).Scan(&user.Username, &hashedPassword)
 	if err != nil {
-		log.Fatal(err)
+		if err == sql.ErrNoRows {
+			http.Error(w, "Invalid email or password", http.StatusBadRequest)
+			log.Printf("Email не найден\nОшибка: %v", err)
+			return
+		}
+		log.Println(err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
 	}
+
+	fmt.Println("User Pass: ", user.Password)
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(user.Password))
+	if err != nil {
+		http.Error(w, "Invalid email or password", http.StatusBadRequest)
+		log.Printf("Неверный пароль\nОшибка: %v", err)
+		return
+	}
+
+	fmt.Println("User Pass: ", user.Password)
+
+	// var id int64
+	fmt.Println("Username: ", user.Username)
+	err = stmt.QueryRow(user.Email).Scan(&user.Username, &user.Password)
+	// err = stmt.QueryRow(user.Email).Scan(&user.Username)
+
+	if err != nil {
+		log.Panicln(err)
+	}
+
+	fmt.Println("Username: ", user.Username)
 
 	// Возвращаем ответ с именем пользователя в теле
 	resp := struct {
@@ -172,6 +215,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("Выполнен вход под именем пользователя:", user.Username)
 
+	fmt.Println("User Pass: ", user.Password)
 	fmt.Println(resp)
 }
 
@@ -213,59 +257,46 @@ func generateSessionID(length int) string {
 	return string(b)
 }
 
+// DB
+
+func DBQuerry(querry, comment string) {
+	// защищаем переменные БД
+	// DBConn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DBUser, DBPass, DBHost, DBPort, DBName)
+
+	// Соедененеие с базой данных
+	db, err := sql.Open("mysql", DBConn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	_, err = db.Exec(fmt.Sprint(querry))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println(comment)
+}
+
 // Creating Tables
 func InitTables() {
-	CreateUsers()
-	CreateSessions()
-	log.Println("БД подключена...")
-}
-
-// Session table
-func CreateSessions() {
-	// Инициализация соединения с базой данных
-	db, err := sql.Open("mysql", DBConn)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	// Создание таблицы sessions, если ее нет
-	_, err = db.Exec(`
-        CREATE TABLE IF NOT EXISTS sessions (
-            id VARCHAR(350) NOT NULL PRIMARY KEY,
-            user_id VARCHAR(350) NOT NULL,
-            token VARCHAR(128) DEFAULT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-    `)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Println("Таблица sessions создана или уже существует")
-}
-
-// Users table
-func CreateUsers() {
-	// Инициализация соединения с базой данных
-	db, err := sql.Open("mysql", DBConn)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	// Создание таблицы users, если ее нет
-	_, err = db.Exec(`
+	// Create users table
+	DBQuerry(`
 	CREATE TABLE IF NOT EXISTS users (
 		id INT AUTO_INCREMENT PRIMARY KEY,
 		username VARCHAR(50) UNIQUE NOT NULL,
 		email VARCHAR(50) UNIQUE NOT NULL,
-		password VARCHAR(50) NOT NULL
-	  );
-    `)
-	if err != nil {
-		log.Fatal(err)
-	}
+		password VARCHAR(255) NOT NULL
+	  );`, "Таблица users создана или уже существует")
 
-	log.Println("Таблица users создана или уже существует")
+	// Create sessions table
+	DBQuerry(`
+	CREATE TABLE IF NOT EXISTS sessions (
+		id VARCHAR(350) NOT NULL PRIMARY KEY,
+		user_id VARCHAR(350) NOT NULL,
+		token VARCHAR(128) DEFAULT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);`, "Таблица sessions создана или уже существует")
+
+	log.Println("Таблицы users, session созданы...")
 }
