@@ -38,7 +38,7 @@
 
   `/login` heandler
 
-![login-screen](docs/img/empty.png)
+![login-screen](docs/img/login.jpg)
 
 ### After authorization, the password is hashed
 \
@@ -51,9 +51,7 @@
 
 ### `/signup` heandler 
 \
-![](docs/img/signup.jpg)
-
-![](docs/img/signup-process.jpg)
+![](docs/img/signup-process.png)
   
 </details>
 
@@ -115,5 +113,7 @@ go build -o server main.go # make build
 
 ## TODO
 
+- vite + ReactJS client
 - responsive client
 - debug client
+- ssl support
