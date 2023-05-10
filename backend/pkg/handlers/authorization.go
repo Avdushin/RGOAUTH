@@ -17,6 +17,10 @@ type User struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+	// Profile
+	Surname    string `json:"surname"`
+	Patronymic string `json:"patronymic"`
+	Age        uint32 `json:"age"`
 }
 
 // SignUp handler
@@ -144,7 +148,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(user.Password)); err != nil {
-		http.Error(w, "Invalid email or password", http.StatusBadRequest)
+		http.Error(w, "Invalid email or password", http.StatusUnauthorized) // StatusBadRequest
 		log.Printf("Неверный пароль\nОшибка: %v", err)
 		return
 	}

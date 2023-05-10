@@ -3,15 +3,10 @@
     width: 100%;
     margin: 0 auto;
 }
-.reg-btn {
-}
-
 .label-box {
     display: block;
     line-height: 0.3;
 }
-.mt-form label {}
-
 .mt-form input {
     width: 200px;
     height: 15px;
@@ -36,4 +31,7 @@
 }
 .reg-btn button:hover {
     background-color: var(--green-hover);
+}
+.under-auth p {
+    font-size: 1.01rem;
 }

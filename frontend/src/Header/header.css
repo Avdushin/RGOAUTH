@@ -1,62 +1,64 @@
 @import url(../assets/css/variables.css);
 .header {
-    position: fixed;
-    display: flex;
-    padding: 10px 0;
-    height: 30px;
-    justify-content: space-around;
-    align-items: center;
-    background: var(--green);
-    z-index: var(--zi-header);
-    width: 100%;
+  position: fixed;
+  display: flex;
+  padding: 10px 0;
+  height: 30px;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--green);
+  z-index: var(--zi-header);
+  width: 100%;
 }
 .version {
-    font-size: 12px;
+  font-size: 12px;
 }
 .logo {
-    color: #fff;
-    display: flex;
-    height: 40px;
-    align-items: center;
-    gap: 20px;
+  color: #fff;
+  display: flex;
+  height: 40px;
+  align-items: center;
+  gap: 20px;
 }
 .logo_links {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 .logo_links-item {
-    color: #fff;
-    font-size: 20px;
-    gap: 20px;
-    transition: all 1.5s ease-in-out;
+  color: #fff;
+  font-size: 20px;
+  gap: 20px;
+  transition: all 1.5s ease-in-out;
 }
 .logo_links-item:hover {
-    height: 26px;
-    border-bottom: 1px solid #fff;
+  height: 26px;
+  border-bottom: 1px solid #fff;
 }
 .menu {
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 }
-.menu__item, .log-reg, .logout {
-    font-weight: 500;
-    color: #fff;
-    display: flex;
-    height: 20px;
-    align-items: center;
-    font-size: 15px;
+.menu__item,
+.log-reg,
+.logout {
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  height: 20px;
+  align-items: center;
+  font-size: 15px;
 }
 
 .hello h3 {
-    font-size: 20px;
+  font-size: 20px;
 }
 .helo-zone {
-    height: 20px;
-    align-items: center;
-    font-size: 15px;
-    display: flex;
-    gap: 10px;
+  height: 20px;
+  align-items: center;
+  font-size: 15px;
+  display: flex;
+  gap: 10px;
 }
 .logout {
-    font-size: 20px;
+  font-size: 20px;
 }

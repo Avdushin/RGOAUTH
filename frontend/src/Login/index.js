@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/css/forms.css'
 
@@ -19,7 +20,7 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8080/login', { email, password })
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { email, password })
       .then(response => {
         setMessage(response.data.message);
         localStorage.setItem('username', response.data.username);
@@ -48,26 +49,29 @@ function LoginForm() {
           <label>
             <p className="labelp">Email</p>
             <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder='Enter your email'
-            required />
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder='Enter your email'
+              required />
           </label>
         </div>
         <div className="label-box">
           <label>
             <p className="labelp">Password</p>
             <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder='Enter your password'
-            required />
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder='Enter your password'
+              required />
           </label>
         </div>
         <div className="reg-btn">
           <button type="submit">Войти</button>
+        </div>
+        <div className="under-auth">
+          <p>Нет аккаунта? <NavLink to='/register'>Регистрация</NavLink></p>
         </div>
         {message && <p>{message}</p>}
       </form>

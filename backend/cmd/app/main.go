@@ -23,6 +23,10 @@ func main() {
 	// Handlers
 	http.HandleFunc("/register", handlers.RegisterHandler)
 	http.HandleFunc("/login", handlers.LoginHandler)
+
 	// Start server
 	log.Fatal(http.ListenAndServe(vars.PORT, nil))
+
+	// Start SSL server
+	// log.Fatal(http.ListenAndServeTLS(vars.PORT, "var/certs/cert.pem", "var/certs/key.pem", nil))
 }

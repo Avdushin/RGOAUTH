@@ -11,10 +11,10 @@ const Docs = () => {
         <div className="sidebar__topics">
           <ul>
             <li><a href="#section-1">Что отакое {APPNAME}?</a></li>
-            <li><a href="handlers">Handlers</a></li>
-                <ul><a href="#handlers#/">/ heandler</a></ul>
-                <ul><a href="#handlers#/login">/login heandler</a></ul>
-                <ul><a href="#handlers#/signup">/signup heandler</a></ul>
+            <li><a href="#handlers">Handlers</a></li>
+            <ul><a href="#handlers#/">/ heandler</a></ul>
+            <ul><a href="#handlers#/login">/login heandler</a></ul>
+            <ul><a href="#handlers#/signup">/signup heandler</a></ul>
             <li><a href="#db-mysql">База данных</a></li>
           </ul>
         </div>
@@ -32,7 +32,7 @@ const Docs = () => {
         <p className='pod'>main page</p>
 
         <div className="image">
-          <img src="/docs/img/rgoauth.png" alt="rgoauth.png" />
+          <img src="/docs/img/main.jpg" alt="main.jpg" />
         </div>
 
         <p className="pod">loggined user</p>
@@ -41,7 +41,6 @@ const Docs = () => {
         </div>
 
         <h3 id='handlers#/login'><code>/login</code></h3>
-
 
         <div className="image">
           <img src="/docs/img/login.jpg" alt="login-screen" />
@@ -63,7 +62,6 @@ const Docs = () => {
         <div className="image">
           <img src="/docs/img/signup-process.png" alt="signup-process" />
         </div>
-
 
         <h3 id='db-mysql'>База данных</h3>
 

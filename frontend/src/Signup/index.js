@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState }from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css'
 
@@ -32,7 +33,7 @@ function RegistrationForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:8080/register', { username, email, password })
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/register`, { username, email, password })
             .then(response => {
                 setMessage(response.data.message);
                 // clear input values
@@ -87,6 +88,9 @@ function RegistrationForm() {
                 </div>
                 <div className="reg-btn">
                     <button type="submit">Зарегистрироваться</button>
+                </div>
+                <div className="under-auth">
+                    <p>Уже есть аккаунт? <NavLink to='/login'>Войти</NavLink></p>
                 </div>
                 {message && <p>{message}</p>}
                 {isRegistered && <p>Пользователь {registrant} успешно зарегистрирован!</p>}
