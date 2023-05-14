@@ -113,7 +113,10 @@ go build -o server main.go # make build
 
 ## TODO
 
-- vite + ReactJS client
-- responsive client
-- debug client
-- ssl support
+- [ ] vite + ReactJS client
+- [ ] responsive client
+- [ ] debug client
+- [ ] ssl support
+- [ ] Make automatic BD backup
+- [ ] Edit user
+- [ ] Delete user

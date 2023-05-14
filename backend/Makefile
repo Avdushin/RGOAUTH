@@ -7,4 +7,4 @@ build:
 
 # start binary app
 start:
-	./start
+	./server
