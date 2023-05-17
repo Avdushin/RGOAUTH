@@ -44,20 +44,26 @@ func InitTables() {
 	// Create users table
 	DBQuerry(`
 	CREATE TABLE IF NOT EXISTS users (
-		id INT AUTO_INCREMENT PRIMARY KEY,
-		username VARCHAR(50) UNIQUE NOT NULL,
-		email VARCHAR(50) UNIQUE NOT NULL,
-		password VARCHAR(255) NOT NULL
-	  );`, "[DB]: `users` table is ready...")
+		id INT NOT NULL AUTO_INCREMENT,
+		username VARCHAR(50) NOT NULL DEFAULT '',
+		email VARCHAR(50) NOT NULL DEFAULT '',
+		password VARCHAR(255) NOT NULL DEFAULT '',
+		name VARCHAR(255) DEFAULT '',
+		surname VARCHAR(255) DEFAULT '',
+		patronymic VARCHAR(255) DEFAULT '',
+		age INT UNSIGNED DEFAULT 0,
+		PRIMARY KEY (id),
+		UNIQUE KEY (username),
+		UNIQUE KEY (email)
+	  );`, "[DB]: users table is ready...")
 
-	// Create sessions table
 	// DBQuerry(`
-	// CREATE TABLE IF NOT EXISTS sessions (
-	// 	id VARCHAR(350) NOT NULL PRIMARY KEY,
-	// 	user_id VARCHAR(350) NOT NULL,
-	// 	token VARCHAR(128) DEFAULT NULL,
-	// 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-	// );`, "Таблица sessions создана или уже существует")
+	// CREATE TABLE IF NOT EXISTS users (
+	// 	id INT AUTO_INCREMENT PRIMARY KEY,
+	// 	username VARCHAR(50) UNIQUE NOT NULL,
+	// 	email VARCHAR(50) UNIQUE NOT NULL,
+	// 	password VARCHAR(255) NOT NULL
+	//   );`, "[DB]: `users` table is ready...")
 
 	log.Println("[DB]: Таблицы созданы...")
 }
@@ -137,7 +143,7 @@ func BackupDB() {
 	// 	log.Fatalf("Ошибка при получении информации о файле %s: %v", backupFileName, err)
 	// }
 
-	// if fileInfo.Size() > 4*1024 { // 20 мб в байтах 20*1024*1024
+	// if fileInfo.Size() > 4*1024*1024 { // 20 мб в байтах 20*1024*1024
 	// 	// Создаем новый архив
 	// 	zipFile, err := os.Create(zipFileName)
 	// 	if err != nil {
@@ -189,7 +195,6 @@ func addFileToZip(filePath string, zipWriter *zip.Writer) error {
 }
 
 func SaveStorage() {
-
 	// Получаем текущее время
 	now := time.Now().Local()
 	DateFormat := now.Format("2006-01-02_15-04-05")

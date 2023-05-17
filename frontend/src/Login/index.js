@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../assets/css/forms.css'
 
 function LoginForm() {
+  const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -23,6 +24,8 @@ function LoginForm() {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, { email, password })
       .then(response => {
         setMessage(response.data.message);
+        console.log(response.data)
+        localStorage.setItem('id', response.data.id);
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('email', response.data.email);
         localStorage.setItem('password', response.data.password);

@@ -13,14 +13,14 @@ import (
 )
 
 type User struct {
-	ID       int64  `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	// Profile
+	ID         int    `json:"id"`
+	Username   string `json:"username"`
+	Name       string `json:"name"`
 	Surname    string `json:"surname"`
 	Patronymic string `json:"patronymic"`
-	Age        uint32 `json:"age"`
+	Age        string `json:"age"`
+	Email      string `json:"email"`
+	Password   string `json:"password"`
 }
 
 // SignUp handler
@@ -127,7 +127,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Проверяем, что пользователь существует и пароль совпадает
 	// SELECT id FROM users WHERE username = ? AND password = ?
-	stmt, err := db.Prepare("SELECT username, password FROM users WHERE email = ?")
+	stmt, err := db.Prepare("SELECT id, username, password FROM users WHERE email = ?")
 	if err != nil {
 		log.Println("Error preparing database query:", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -136,7 +136,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	defer stmt.Close()
 
 	var hashedPassword string
-	if err = stmt.QueryRow(user.Email).Scan(&user.Username, &hashedPassword); err != nil {
+	if err = stmt.QueryRow(user.Email).Scan(&user.ID, &user.Username, &hashedPassword); err != nil {
 		if err == sql.ErrNoRows {
 			http.Error(w, "Invalid email or password", http.StatusBadRequest)
 			log.Printf("Email не найден\nОшибка: %v", err)
@@ -153,16 +153,18 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err = stmt.QueryRow(user.Email).Scan(&user.Username, &user.Password); err != nil {
+	if err = stmt.QueryRow(user.Email).Scan(&user.ID, &user.Username, &user.Password); err != nil {
 		log.Panicln(err)
 	}
 
 	// Возвращаем ответ с именем пользователя в теле
 	resp := struct {
+		ID       int    `json:"id"`
 		Username string `json:"username"`
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}{
+		ID:       user.ID,
 		Username: user.Username,
 		Email:    user.Email,
 		Password: user.Password,
@@ -174,3 +176,70 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	// fmt.Println(resp) // json response
 }
+
+// func RegisterHandler(c *gin.Context) {
+// 	var user User
+// 	if err := c.ShouldBindJSON(&user); err != nil {
+// 		log.Println("Error decoding user registration request:", err)
+// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+// 		return
+// 	}
+
+// 	db, err := sql.Open("mysql", vars.DBConn)
+// 	if err != nil {
+// 		log.Println("Error connecting to database:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+// 	defer db.Close()
+
+// 	stmt, err := db.Prepare("SELECT id FROM users WHERE username = ?")
+// 	if err != nil {
+// 		log.Println("Error preparing database query:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+// 	defer stmt.Close()
+
+// 	var id int64
+// 	err = stmt.QueryRow(user.Username).Scan(&id)
+// 	if err == nil {
+// 		// User already exists
+// 		c.AbortWithStatusJSON(http.StatusConflict, gin.H{"error": "User already exists"})
+// 		return
+// 	}
+
+// 	stmt, err = db.Prepare("INSERT INTO users(username, email, password) VALUES(?, ?, ?)")
+// 	if err != nil {
+// 		log.Println("Error preparing database statement:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+// 	defer stmt.Close()
+
+// 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+// 	if err != nil {
+// 		log.Println("Error hashing password:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+
+// 	result, err := stmt.Exec(user.Username, user.Email, string(hashedPassword))
+// 	if err != nil {
+// 		log.Println("Error inserting user into database:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+
+// 	id, err = result.LastInsertId()
+// 	if err != nil {
+// 		log.Println("Error getting last insert ID:", err)
+// 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
+// 		return
+// 	}
+
+// 	response := map[string]interface{}{"id": id}
+// 	c.JSON(http.StatusOK, response)
+
+// 	log.Printf("Создан пользователь: %s\n", user.Username)
+// }

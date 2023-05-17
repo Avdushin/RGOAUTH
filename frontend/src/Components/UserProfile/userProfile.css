@@ -1,0 +1,36 @@
+.profile_container {
+  position: relative;
+}
+.user-profile {
+  padding: 40px 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.user-profile h1 {
+  font-size: 30px;
+}
+.profile-user-data {
+}
+.profile-btn {
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 15px;
+}
+.edit-zone-btn {
+  display: flex;
+  margin-top: 20px;
+  gap: 5px;
+}
+.save-btn {
+  background: #0e8869;
+}
+.cancel-btn {
+  background: #88160e;
+}
+.edit-btn {
+  background: #0e8869;
+}

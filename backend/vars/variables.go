@@ -8,7 +8,9 @@ import (
 )
 
 var (
-	_ = godotenv.Load()
+	// app
+	VERSION = "1.1"
+	_       = godotenv.Load()
 	// .env vars
 	PORT = os.Getenv("PORT")
 	// Получение переменных окружения
@@ -22,4 +24,5 @@ var (
 	// DBConn = fmt.Sprintf("%s@tcp(%s:%s)/%s", DBUser, DBHost, DBPort, DBName)
 	// other type of connection with pass
 	DBConn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", DBUser, DBPass, DBHost, DBPort, DBName)
+	GormDB = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", DBUser, DBPass, DBHost, DBPort, DBName)
 )

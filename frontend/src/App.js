@@ -1,4 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route } from 'react-router-dom';
 import './App.css';
 import Err404 from './Error404';
 import RegistrationForm from './Signup';
@@ -7,6 +10,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import Docs from './Pages/Docs';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   return (
@@ -19,6 +23,7 @@ function App() {
         <Route path='/login' element={<LoginForm />} />
         <Route path='/*' element={<Err404 />} />
         <Route path='/docs' element={<Docs />} />
+        <Route path='/api/users/:id' element={<UserProfile />} />
       </Routes>
       </div>
     </Router>

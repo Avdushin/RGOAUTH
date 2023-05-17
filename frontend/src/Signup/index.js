@@ -42,7 +42,7 @@ function RegistrationForm() {
                 setPassword('');
                 setIsRegistered(true);
                 setTimeout(() => {
-                    window.location.href = "/";
+                    window.location.href = "/login";
                 }, 1000);
             })
             .catch(error => setMessage(error.response.data.message || error.message));
@@ -52,7 +52,8 @@ function RegistrationForm() {
         <div className='fmt-form mt-form'>
             <h1>Регистрация</h1>
             <hr width="13%" />
-            <form onSubmit={handleSubmit} onClick={SetLocalStorageItems}>
+            <form onSubmit={handleSubmit} >
+                {/* onClick={SetLocalStorageItems} */}
                 <div className="label-box">
                     <label>
                         <p className="labelp">Username</p>

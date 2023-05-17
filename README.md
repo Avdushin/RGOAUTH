@@ -55,6 +55,13 @@
   
 </details>
 
+<details>
+  <summary><code>/api/users/:id</code> heandler </summary>
+
+### `/api/users/:id` heandler 
+
+</details>
+
 ## БД
 
 <details>
@@ -113,10 +120,10 @@ go build -o server main.go # make build
 
 ## TODO
 
+- [x] Make automatic BD backup
+- [x] Edit user
+- [ ] Delete user
+- [ ] ssl support
 - [ ] vite + ReactJS client
 - [ ] responsive client
 - [ ] debug client
-- [ ] ssl support
-- [ ] Make automatic BD backup
-- [ ] Edit user
-- [ ] Delete user
