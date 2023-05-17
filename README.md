@@ -58,7 +58,17 @@
 <details>
   <summary><code>/api/users/:id</code> heandler </summary>
 
-### `/api/users/:id` heandler 
+### User profile
+\
+![](./docs/img/user_profile.jpg)
+
+### Edit user profile
+\
+![](./docs/img/edit_profile.jpg)
+
+### Validation
+\
+![](./docs/img/edit_profile_validate.jpg)
 
 </details>
 
@@ -75,11 +85,11 @@
   
 структура:
 
-![](docs/img/db/users_struct.jpg)
+![](docs/img/db/describe.jpg)
 
 пример:
 
-![](docs/img/db/users_example.jpg)
+![](docs/img/db/select.jpg)
 
 </details>
 

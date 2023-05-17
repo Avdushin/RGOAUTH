@@ -15,6 +15,7 @@ const Docs = () => {
             <ul><a href="#handlers#/">/ heandler</a></ul>
             <ul><a href="#handlers#/login">/login heandler</a></ul>
             <ul><a href="#handlers#/signup">/signup heandler</a></ul>
+            <ul><a href="#handlers#/api/users/:id">/api/users/:id</a></ul>
             <li><a href="#db-mysql">База данных</a></li>
           </ul>
         </div>
@@ -63,16 +64,31 @@ const Docs = () => {
           <img src="/docs/img/signup-process.png" alt="signup-process" />
         </div>
 
+        <h3 id='handlers#/api/users/:id'><code>/api/users/:id</code></h3>
+
+        <p className='pod'>Профиль пользователя</p>
+        <div className="image">
+          <img src="/docs/img/profile/user_profile.jpg" alt="signup" />
+        </div>
+        <p className='pod'>Редактирование профиля</p>
+        <div className="image">
+          <img src="/docs/img/profile/edit_profile.jpg" alt="signup" />
+        </div>
+        <p className='pod'>Редактировать проверку профиля<br /> Вы не можете изменить свои данные без пароля</p>
+        <div className="image">
+          <img src="/docs/img/profile/edit_profile_validate.jpg" alt="signup" />
+        </div>
+
         <h3 id='db-mysql'>База данных</h3>
 
         <p className='pod'>структура:</p>
 
         <div className="image">
-          <img src="/docs/img/db/users_struct.jpg" alt="users_struct" />
+          <img src="/docs/img/db/describe.jpg" alt="users_struct" />
         </div>
         <p className='pod'>пример:</p>
         <div className="image">
-          <img src="/docs/img/db/users_example.jpg" alt="users_example" />
+          <img src="/docs/img/db/select.jpg" alt="users_example" />
         </div>
       </div>
     </div>

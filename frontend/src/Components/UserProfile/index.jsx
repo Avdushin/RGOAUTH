@@ -161,7 +161,7 @@ function UserProfile() {
                 <div>
                     <label>
                         Возраст:
-                        <input type="number" value={age} onChange={handleAgeChange} />
+                        <input type="number" value={age} max="130" onChange={handleAgeChange} />
                     </label>
                 </div>
                 <div className='edit-zone-btn'>
