@@ -82,7 +82,7 @@ function UserProfile() {
       
         axios.defaults.headers.post['Content-Type'] = 'application/json';
       
-        // Провалидация поля Password
+        // валидация поля Password
         if (password === '') {
           window.alert('Введите ваш пароль');
           return; // Останавливаем выполнение функции, если поле Password пустое

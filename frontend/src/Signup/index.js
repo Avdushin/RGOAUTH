@@ -23,13 +23,13 @@ function RegistrationForm() {
     }
 
     // set LocalStorage items
-    const SetLocalStorageItems = () => {
-        // set localstorage items
-        localStorage.setItem("registrant", username);
-        localStorage.setItem('username', username);
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-    }
+    // const SetLocalStorageItems = () => {
+    //     // set localstorage items
+    //     localStorage.setItem("registrant", username);
+    //     localStorage.setItem('username', username);
+    //     localStorage.setItem('email', email);
+    //     localStorage.setItem('password', password);
+    // }
 
     const handleSubmit = (event) => {
         event.preventDefault();

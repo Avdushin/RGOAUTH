@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// Установка соединения с базой данных MySQL
-	db, err := sql.Open("mysql", vars.DBConn)
+	db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,7 +25,7 @@ func main() {
 
 	// Logger
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Println("[DB] SQL adress: ", vars.DBConn)
+	log.Println("[DB] SQL adress: ", vars.DBConn+vars.DBName)
 	if vars.PORT == "" {
 		vars.PORT = ":4000"
 	}
@@ -52,7 +52,7 @@ func main() {
 
 	/*
 	* Start backup DB
-	* Every 5 hours
+	* Every 4 hours
 	 */
 	go func() {
 		for range time.Tick(4 * time.Hour) {
@@ -67,7 +67,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(vars.PORT, corsHandler(router)))
 
 	// Start SSL server (Production Server)
-	// log.Fatal(http.ListenAndServeTLS(vars.PORT, "var/certs/cert.pem", "var/certs/key.pem", corsHandler(router)))
+	// log.Fatal(http.ListenAndServeTLS(vars.PORT, vars.Cert, vars.Key, corsHandler(router)))
 }
 
 func handleOptions(w http.ResponseWriter, r *http.Request) {

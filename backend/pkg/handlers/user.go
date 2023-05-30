@@ -19,7 +19,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Установка соединения с базой данных MySQL
-	db, err := sql.Open("mysql", vars.DBConn)
+	db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,7 +49,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCORS(&w)
 	if r.Method == http.MethodPut {
-		db, err := sql.Open("mysql", vars.DBConn)
+		db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

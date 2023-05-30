@@ -132,8 +132,8 @@ go build -o server main.go # make build
 
 - [x] Make automatic BD backup
 - [x] Edit user
+- [x] ssl support
+- [x] debug client
 - [ ] Delete user
-- [ ] ssl support
 - [ ] vite + ReactJS client
 - [ ] responsive client
-- [ ] debug client

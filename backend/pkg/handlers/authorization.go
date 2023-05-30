@@ -38,7 +38,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db, err := sql.Open("mysql", vars.DBConn)
+	db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 
 	if err != nil {
 		log.Println("Error connecting to database:", err)
@@ -117,7 +117,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	db, err := sql.Open("mysql", vars.DBConn)
+	db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 	if err != nil {
 		log.Println("Error connecting to database:", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -185,7 +185,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 // 		return
 // 	}
 
-// 	db, err := sql.Open("mysql", vars.DBConn)
+// 	db, err := sql.Open("mysql", vars.DBConn+vars.DBName)
 // 	if err != nil {
 // 		log.Println("Error connecting to database:", err)
 // 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Internal server error"})
